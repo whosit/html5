@@ -31,11 +31,25 @@
             alert('We weren\'t granted permission.');
           }
         });
-      }      
+      }
+      
+      function pageLoad(){
+        if (!('serviceWorker' in navigator)) {
+          // Service Worker isn't supported on this browser, disable or hide UI.
+          alert("serviceWorker not supported!");
+          return;
+        }
+
+        if (!('PushManager' in window)) {
+          // Push isn't supported on this browser, disable or hide UI.
+          alert("PushManager not supported!");
+          return;
+        }
+      }
   </script>
   
   </head>
-<body onload="askPermission()">
+<body onload="pageLoad()">
 
 </body>
 </html>
