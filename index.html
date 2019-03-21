@@ -46,7 +46,17 @@
           return;
         }
         
-        registerServiceWorker();
+        var regPromise = new Promise(function(resolve, reject) {
+          var registration = registerServiceWorker();
+          if (registration === undefined){
+            reject(Error("Failed to register service worker"));
+          }else{
+            resolve(registration);
+          }
+        }).then(function(registration){
+          askPermission();
+        });
+       
       }
   </script>
   
